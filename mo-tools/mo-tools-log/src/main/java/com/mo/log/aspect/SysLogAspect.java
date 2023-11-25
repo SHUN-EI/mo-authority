@@ -6,7 +6,7 @@ import cn.hutool.core.util.StrUtil;
 import cn.hutool.core.util.URLUtil;
 import cn.hutool.extra.servlet.ServletUtil;
 import com.alibaba.fastjson.JSONObject;
-import com.mo.log.base.R;
+import com.mo.base.R;
 import com.mo.log.entity.OptLogDTO;
 import com.mo.log.event.SysLogEvent;
 import com.mo.log.util.LogUtil;

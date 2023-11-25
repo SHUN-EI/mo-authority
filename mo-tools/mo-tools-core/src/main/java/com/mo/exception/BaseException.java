@@ -1,4 +1,4 @@
-package com.mo.log.base;
+package com.mo.exception;
 
 /**
  * 异常接口类

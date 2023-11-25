@@ -1,7 +1,9 @@
-package com.mo.log.base;
+package com.mo.base;
 
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.Maps;
+import com.mo.exception.BizException;
+import com.mo.exception.code.BaseExceptionCode;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
@@ -11,7 +13,7 @@ import java.util.Map;
 
 
 /**
- *
+ * 返回结果类
  */
 @Getter
 @Setter

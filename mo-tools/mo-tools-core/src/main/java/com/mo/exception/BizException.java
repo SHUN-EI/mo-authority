@@ -1,9 +1,11 @@
-package com.mo.log.base;
+package com.mo.exception;
+
+
+import com.mo.exception.code.BaseExceptionCode;
 
 /**
  * 业务异常
  * 用于在处理业务逻辑时，进行抛出的异常。
- *
  */
 public class BizException extends BaseUncheckedException {
 

@@ -1,4 +1,4 @@
-package com.mo.log.base;
+package com.mo.exception;
 
 /**
  * 非运行期异常基类，所有自定义非运行时异常继承该类
