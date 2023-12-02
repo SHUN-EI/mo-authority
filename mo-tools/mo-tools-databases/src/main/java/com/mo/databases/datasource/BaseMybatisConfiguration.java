@@ -77,7 +77,7 @@ public abstract class BaseMybatisConfiguration {
      * @return
      */
     @Bean
-    @ConditionalOnProperty(name = "pinda.database.isMultiTenant", havingValue = "true", matchIfMissing = true)
+    @ConditionalOnProperty(name = "database.isMultiTenant", havingValue = "true", matchIfMissing = true)
     public TenantWebMvcConfigurer getTenantWebMvcConfigurer() {
         return new TenantWebMvcConfigurer();
     }

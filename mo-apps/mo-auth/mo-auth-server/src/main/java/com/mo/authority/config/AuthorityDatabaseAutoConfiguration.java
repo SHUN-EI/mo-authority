@@ -1,10 +1,11 @@
-package com.mo.databases.datasource;
+package com.mo.authority.config;
 
 import cn.hutool.core.util.ArrayUtil;
 import com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceBuilder;
 import com.baomidou.mybatisplus.autoconfigure.ConfigurationCustomizer;
 import com.baomidou.mybatisplus.autoconfigure.MybatisPlusProperties;
 import com.baomidou.mybatisplus.autoconfigure.MybatisPlusPropertiesCustomizer;
+import com.mo.databases.datasource.BaseDatabaseConfiguration;
 import com.mo.databases.properties.DatabaseProperties;
 import com.p6spy.engine.spy.P6DataSource;
 import lombok.extern.slf4j.Slf4j;
