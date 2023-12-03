@@ -6,6 +6,7 @@ import com.mo.authority.service.auth.LoginService;
 import com.mo.authority.service.auth.ValidateCodeService;
 import com.mo.base.BaseController;
 import com.mo.base.R;
+import com.mo.log.annotation.SysLog;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,7 @@ public class LoginController extends BaseController {
     private LoginService loginService;
 
     @GetMapping(value = "/captcha", produces = "image/png")
+    @SysLog("获取图形验证码")
     @ApiOperation(notes = "获取图形验证码", value = "获取图形验证码")
     public void captcha(@RequestParam(value = "key") String key, HttpServletResponse response) {
         validateCodeService.createCaptcha(key, response);
@@ -43,6 +45,7 @@ public class LoginController extends BaseController {
 
     @PostMapping("/login")
     @ApiOperation(notes = "登录", value = "登录")
+    @SysLog("登录")
     public R<LoginDTO> login(@Validated @RequestBody LoginParamDTO loginParamDTO) {
 
         Boolean check = validateCodeService.checkCode(loginParamDTO.getKey(), loginParamDTO.getCode());
