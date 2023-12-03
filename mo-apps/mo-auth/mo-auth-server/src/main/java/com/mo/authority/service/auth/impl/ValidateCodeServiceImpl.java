@@ -6,6 +6,7 @@ import com.mo.exception.BizException;
 import com.wf.captcha.ArithmeticCaptcha;
 import com.wf.captcha.base.Captcha;
 import net.oschina.j2cache.CacheChannel;
+import net.oschina.j2cache.CacheObject;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -57,5 +58,39 @@ public class ValidateCodeServiceImpl implements ValidateCodeService {
             throw BizException.validFail("获取图形验证码异常:{}", e);
         }
 
+    }
+
+    /**
+     * 校验验证码
+     *
+     * @param key  前端上送 key
+     * @param code 前端上送待校验值
+     */
+    @Override
+    public Boolean checkCode(String key, String code) {
+
+        if (StringUtils.isBlank(key)) {
+            throw BizException.validFail("验证码key不能为空");
+        }
+
+        if (StringUtils.isBlank(code)) {
+            throw BizException.validFail("请输入验证码");
+        }
+
+        //根据key从缓存中获取验证码
+        CacheObject cacheObject = cacheChannel.get(CacheKey.CAPTCHA, key);
+
+        if (cacheObject.getValue() == null) {
+            throw BizException.validFail("验证码已过期");
+        }
+
+        String cacheCode = String.valueOf(cacheObject.getValue());
+        if (!StringUtils.endsWithIgnoreCase(code, cacheCode)) {
+            throw BizException.validFail("验证码不正确");
+        }
+
+        //验证通过，立即从缓存中删除验证码
+        cacheChannel.evict(CacheKey.CAPTCHA, key);
+        return true;
     }
 }

@@ -8,4 +8,6 @@ import javax.servlet.http.HttpServletResponse;
 public interface ValidateCodeService {
 
     void createCaptcha(String key, HttpServletResponse response);
+
+    Boolean checkCode(String key, String code);
 }
