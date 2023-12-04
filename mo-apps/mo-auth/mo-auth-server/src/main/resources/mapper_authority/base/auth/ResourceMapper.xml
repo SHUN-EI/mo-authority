@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mo.authority.mapper.auth.ResourceMapper">
+
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap"
-               type="com.mo.authority.entity.auth.Resource">
+    <resultMap id="BaseResultMap" type="com.mo.authority.entity.auth.Resource">
         <id column="id" jdbcType="BIGINT" property="id"/>
         <result column="create_user" jdbcType="BIGINT" property="createUser"/>
         <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
@@ -19,19 +19,8 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, create_user, create_time, update_user, update_time,
+        id, create_user, create_time, update_user, update_time, 
         code, name, menu_id, describe_,method,url
     </sql>
 
-    <select id="findVisibleResource"  resultMap="BaseResultMap">
-        SELECT
-        <include refid="Base_Column_List"/>
-        from pd_auth_resource where 1=1
-        and id in (
-        SELECT authority_id FROM pd_auth_role_authority ra INNER JOIN pd_auth_user_role ur on ra.role_id = ur.role_id
-        INNER JOIN pd_auth_role r on r.id = ra.role_id
-        where ur.user_id = #{userId, jdbcType=BIGINT} and r.`status` = true
-        and ra.authority_type = 'RESOURCE'
-        )
-    </select>
 </mapper>
