@@ -15,6 +15,9 @@ import java.util.List;
 @Repository
 public interface ResourceMapper extends BaseMapper<Resource> {
 
+    /**
+     * 查询用户拥有的资源
+     */
     List<Resource> findVisibleResource(ResourceQueryDTO resource);
 
     List<Long> findMenuIdByResourceId(@Param("resourceIdList") List<Long> resourceIdList);

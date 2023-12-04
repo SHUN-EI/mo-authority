@@ -5,6 +5,7 @@ import com.mo.base.R;
 
 /**
  * Created by mo on 2023/12/3
+ * 登录-业务接口
  */
 public interface LoginService {
     R<LoginDTO> login(String account, String password);
