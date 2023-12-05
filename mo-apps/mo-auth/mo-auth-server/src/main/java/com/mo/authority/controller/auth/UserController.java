@@ -2,9 +2,11 @@ package com.mo.authority.controller.auth;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.mo.authority.dto.auth.*;
+import com.mo.authority.entity.auth.Role;
 import com.mo.authority.entity.auth.User;
 import com.mo.authority.entity.core.Org;
 import com.mo.authority.entity.core.Station;
+import com.mo.authority.service.auth.RoleService;
 import com.mo.authority.service.auth.UserService;
 import com.mo.authority.service.core.OrgService;
 import com.mo.authority.service.core.StationService;
@@ -17,6 +19,7 @@ import com.mo.dozer.DozerUtils;
 import com.mo.log.annotation.SysLog;
 import com.mo.user.feign.UserQuery;
 import com.mo.user.model.SysOrg;
+import com.mo.user.model.SysRole;
 import com.mo.user.model.SysStation;
 import com.mo.user.model.SysUser;
 import io.swagger.annotations.Api;
@@ -51,6 +54,8 @@ public class UserController extends BaseController {
     private OrgService orgService;
     @Autowired
     private StationService stationService;
+    @Autowired
+    private RoleService roleService;
 
 
     @ApiOperation(value = "分页查询用户", notes = "分页查询用户")
@@ -202,8 +207,12 @@ public class UserController extends BaseController {
             sysUser.setStation(sysStation);
         }
 
-        //todo 设置角色
-
+        // 设置角色
+        if (query.getFull() || query.getRoles()) {
+            List<Role> roles = roleService.findRoleByUserId(id);
+            List<SysRole> sysRoles = dozerUtils.mapList(roles, SysRole.class);
+            sysUser.setRoles(sysRoles);
+        }
         return success(sysUser);
     }
 
