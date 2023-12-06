@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 /**
  * Created by mo on 2023/12/4
+ * 系统日志 mapper接口
  */
 @Repository
 public interface OptLogMapper extends BaseMapper<OptLog> {
